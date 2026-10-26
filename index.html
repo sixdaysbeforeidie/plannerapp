@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+<symbol id="i-notes" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v9l-6 6H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M14 20v-5a1 1 0 0 1 1-1h5"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 10v6M14 10v6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-todo" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.5 6 1.3 1.3L7 5M3.5 12l1.3 1.3L7 11M3.5 18l1.3 1.3L7 17"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.5 20c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></symbol>
+</defs></svg>
+<main id="auth" class="authcard" hidden>
+  <div class="lang"><button data-l="en">EN</button><button data-l="no">NO</button></div>
+  <span class="logo"><svg class="mark" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="currentColor"/><path d="m7 12.5 3.2 3.2L17 8.8" fill="none" stroke="var(--bg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Planner</span></span>
+  <p class="muted" data-i="a_sub"></p>
+  <input id="a-email" type="email" autocomplete="email" />
+  <input id="a-pass" type="password" autocomplete="current-password" />
+  <div class="arow"><button id="a-in" class="addbtn" data-i="a_in"></button><button id="a-up" class="pill" data-i="a_up"></button></div>
+  <button id="a-google" class="pill wide" data-i="a_google"></button>
+  <p id="a-err" class="aerr" role="alert"></p>
+  <button id="a-guest" class="linkbtn" data-i="a_guest"></button>
+</main>
+<header class="bar">
+  <span class="logo"><svg class="mark" viewBox="0 0 24 24"><rect width="24" height="24" rx="7" fill="currentColor"/><path d="m7 12.5 3.2 3.2L17 8.8" fill="none" stroke="var(--bg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Planner</span></span>
+  <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" /></label>
+  <div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="no">NO</button></div>
+  <button id="me" class="avatar" aria-label="Settings" aria-haspopup="dialog"></button>
+</header>
+<div id="pop" class="pop" role="dialog" aria-label="Settings" hidden></div>
+<div class="shell">
+  <nav>
+    <button data-v="notes"><svg class="i"><use href="#i-notes"/></svg><span data-i="notes"></span></button>
+    <button data-v="todo"><svg class="i"><use href="#i-todo"/></svg><span data-i="todo"></span></button>
+    <button data-v="plans"><svg class="i"><use href="#i-sun"/></svg><span data-i="plans"></span></button>
+    <button data-v="calendar"><svg class="i"><use href="#i-cal"/></svg><span data-i="calendar"></span></button>
+  </nav>
+  <main id="main"></main>
+</div>
+
+<dialog id="dlg">
+  <div class="ed">
+    <div class="edtop"><input id="e-title" />
+      <button id="e-pin" class="icon" type="button" aria-label="Pin"><svg class="i"><use href="#i-pin"/></svg></button></div>
+    <div id="e-body"></div>
+    <div class="edbar">
+      <button id="e-list" class="icon" type="button" aria-label="Checklist"><svg class="i"><use href="#i-check"/></svg></button>
+      <button id="e-del" class="icon" type="button" aria-label="Delete"><svg class="i"><use href="#i-trash"/></svg></button>
+      <button id="e-done" class="done" type="button" data-i="done"></button>
+      <div id="e-colors" class="colors"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="dlgE">
+  <div class="ed">
+    <input id="v-title" maxlength="120" />
+    <textarea id="v-det" rows="3"></textarea>
+    <div class="edbar">
+      <input id="v-date" type="date" /><input id="v-time" type="time" />
+      <label class="yr"><input id="v-yr" type="checkbox" /><span data-i="yearly"></span></label>
+      <button id="v-del" class="icon" type="button" aria-label="Delete"><svg class="i"><use href="#i-trash"/></svg></button>
+      <button id="v-done" class="done" type="button" data-i="done"></button>
+      <div id="v-colors" class="colors"></div>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
